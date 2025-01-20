@@ -18,4 +18,12 @@ export default class UserRepository {
         return UserRepository.UserModel.findOne({email});
     }
 
+    async findAllUsers(): Promise<User[]> {
+        return UserRepository.UserModel.find();
+    }
+
+    async findUserById(userId: string): Promise<User> {
+        return UserRepository.UserModel.findById(userId);
+    }
+
 }

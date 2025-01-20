@@ -8,8 +8,8 @@ import {DataStoredInToken, TokenData} from "@interfaces/auth";
 import {ACCESS_TOKEN_SECRET_KEY, REFRESH_TOKEN_SECRET_KEY} from "@config";
 import {sign} from "jsonwebtoken";
 
-class AuthService {
-    public userRepository: UserRepository
+export default class AuthService {
+    private userRepository: UserRepository
 
     public async signup(userData: CreateUserDto): Promise<User> {
         if(isEmpty(userData)) throw new HttpException(400, 'Userdata is empty')
