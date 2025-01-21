@@ -23,6 +23,19 @@ export default class App {
         this.app = express();
         this.env = NODE_ENV || "development";
         this.port = PORT || 3000;
+
+        this.connectToDatabase()
+            .then(
+            () => {
+                logger.info("Connected to Database successfully");
+            })
+            .catch((err) => {
+                logger.error("Error connecting to Database successfully");
+            })
+        this.initializeMiddlewares()
+        this.initializeRoutes(routes)
+        this.initializeSwagger()
+        this.initializeErrorHandling()
     }
 
     public listen(){
@@ -62,7 +75,7 @@ export default class App {
 
     private initializeRoutes(routes: Routes[]){
         routes.forEach(route => {
-            this.app.use('/', route.router)
+            this.app.use('/api/v1/', route.router)
         })
     }
 

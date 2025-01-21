@@ -1,5 +1,5 @@
 import UserRepository from "@/repositories/user-repository";
-import {CreateUserDto} from "@dtos/users-dto";
+import {RegisterUserDto} from "@dtos/users-dto";
 import {isEmpty} from "@utils/is-empty";
 import {HttpException} from "@exceptions/HttpException";
 import {hash, compare} from "bcrypt";
@@ -9,9 +9,9 @@ import {ACCESS_TOKEN_SECRET_KEY, REFRESH_TOKEN_SECRET_KEY} from "@config";
 import {sign} from "jsonwebtoken";
 
 export default class AuthService {
-    private userRepository: UserRepository
+    private userRepository = new UserRepository();
 
-    public async signup(userData: CreateUserDto): Promise<User> {
+    public async signup(userData: RegisterUserDto): Promise<User> {
         if(isEmpty(userData)) throw new HttpException(400, 'Userdata is empty')
 
         const foundUser = await this.userRepository.findUserByEmail(userData.email);
@@ -21,7 +21,7 @@ export default class AuthService {
         return this.userRepository.addUser({...userData, password: hashedPassword})
     }
 
-    async login(userData: CreateUserDto): Promise<TokenData>{
+    async login(userData: RegisterUserDto): Promise<TokenData>{
         if(isEmpty(userData)) throw new HttpException(400, 'Userdata is empty.')
 
         const foundUser = await this.userRepository.findUserByEmail(userData.email);

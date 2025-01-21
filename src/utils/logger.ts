@@ -4,7 +4,7 @@ import winston from "winston";
 import winstonDaily from 'winston-daily-rotate-file'
 import {LOG_DIR} from "@config";
 
-const logDir = join(__dirname, LOG_DIR)
+const logDir = join(__dirname, LOG_DIR || 'logs')
 
 /*
 * existsSync:: Checking for the presence of the fileSystem.

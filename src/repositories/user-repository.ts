@@ -1,29 +1,25 @@
-import {model, Schema, Document} from "mongoose";
-import {CreateUserDto} from "@dtos/users-dto";
+import {RegisterUserDto} from "@dtos/users-dto";
 import {User} from "@interfaces/user";
+import UserModel from "@models/user-model";
 
 export default class UserRepository {
-    static UserModel = model<User & Document>('User', new Schema({
-        email: {type: String, required: true, unique: true},
-        password: {type: String, required: true},
-    }))
 
-    async addUser(userData: CreateUserDto): Promise<User> {
+    async addUser(userData: RegisterUserDto): Promise<User> {
         //create the new User in our system.
-        return UserRepository.UserModel.create(userData)
+        return UserModel.create(userData)
     }
 
     // Find the user by email.
     async findUserByEmail(email: string): Promise<User> {
-        return UserRepository.UserModel.findOne({email});
+        return UserModel.findOne({email});
     }
 
     async findAllUsers(): Promise<User[]> {
-        return UserRepository.UserModel.find();
+        return UserModel.find();
     }
 
     async findUserById(userId: string): Promise<User> {
-        return UserRepository.UserModel.findById(userId);
+        return UserModel.findById(userId);
     }
 
 }
