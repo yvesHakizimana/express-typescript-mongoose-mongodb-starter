@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "start:dev": "npm run build &&  node dist/index.js",
     "build": "tsc"
   },
   "dependencies": {
@@ -29,6 +30,8 @@
     "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
+    "@swc/cli": "^0.6.0",
+    "@swc/core": "^1.10.8",
     "@types/bcrypt": "^5.0.2",
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
