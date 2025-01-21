@@ -1,8 +1,8 @@
 import express from 'express'
 import {set, connect, disconnect} from "mongoose"
-import {Routes} from "./src/interfaces/routes-interface";
-import {CREDENTIALS, LOG_FORMAT, NODE_ENV, ORIGIN, PORT} from "./src/config";
-import {logger, stream} from "./src/utils/logger";
+import {Routes} from "@interfaces/routes-interface";
+import {CREDENTIALS, LOG_FORMAT, NODE_ENV, ORIGIN, PORT} from "@config";
+import {logger, stream} from "@utils/logger";
 import morgan from "morgan";
 import cors from "cors"
 import hpp from "hpp"
@@ -10,7 +10,7 @@ import helmet from "helmet"
 import compression from "compression"
 import swaggerJsDoc from "swagger-jsdoc"
 import swaggerUi from "swagger-ui-express"
-import errorMiddleware from "./src/middlewares/error-middleware";
+import errorMiddleware from "@middlewares/error-middleware";
 import {mongoDbConnection} from "@databases";
 
 
